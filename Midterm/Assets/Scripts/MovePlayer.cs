@@ -37,6 +37,8 @@ public class MovePlayer : MonoBehaviour
         OSCHandler.Instance.Init();
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/trigger", "ready");
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 1);
+        OSCHandler.Instance.SendMessageToClient("pd2", "/unity/trigger", "ready");
+        OSCHandler.Instance.SendMessageToClient("pd2", "/unity/playseq", 1);
         //*************
 
         rb = GetComponent<Rigidbody>();
@@ -115,6 +117,7 @@ public class MovePlayer : MonoBehaviour
             if (Time.time - lastGroundSoundTime > groundSoundCooldown)
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/colwall", 1);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/colwall", 1);
                 lastGroundSoundTime = Time.time;
             }
         }
@@ -148,27 +151,37 @@ public class MovePlayer : MonoBehaviour
             if (count < 2)
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 500);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/tempo", 500);
             }
             else if (count < 4)
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 400);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/tempo", 400);
             }
             else if (count < 6)
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 300);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/tempo", 300);
+
             }
             else if (count < 8)
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/tempo", 150);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/tempo", 150);
+
             }
             else
             {
                 OSCHandler.Instance.SendMessageToClient("pd", "/unity/playseq", 0);
+                OSCHandler.Instance.SendMessageToClient("pd2", "/unity/playseq", 0);
+
             }
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
             OSCHandler.Instance.SendMessageToClient("pd", "/unity/colwall", 1);
+            OSCHandler.Instance.SendMessageToClient("pd2", "/unity/colwall", 1);
+
         }
     }
 
@@ -176,5 +189,7 @@ public class MovePlayer : MonoBehaviour
     {
         countText.text = "Count: " + count.ToString();
         OSCHandler.Instance.SendMessageToClient("pd", "/unity/trigger", count);
+        OSCHandler.Instance.SendMessageToClient("pd2", "/unity/trigger", count);
+
     }
 }

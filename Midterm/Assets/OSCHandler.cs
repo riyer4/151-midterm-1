@@ -97,6 +97,7 @@ public class OSCHandler : MonoBehaviour
         //Initialize OSC clients (transmitters)
         //Example:		
         CreateClient("pd", IPAddress.Parse("127.0.0.1"), 8000);
+		CreateClient("pd2", IPAddress.Parse("127.0.0.1"), 8002);
 
 
         //Initialize OSC servers (listeners)
